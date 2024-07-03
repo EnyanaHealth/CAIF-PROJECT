@@ -1,3 +1,4 @@
+//setting up dependencies & server
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -7,11 +8,33 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Import routes
+const ussdRoutes = require('./routes/index');
+
+app.use('/ussd', ussdRoutes);
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+});
+
+//past code not needed
+/*
 // Handle GET request for the root path
 app.get('/', (req, res) => {
-    res.send('Welcome to your agriculture extension service.');
+    const welcomeMessage = `
+        Welcome to the Amatuungo Aid. We can provide you with knowledge related to livestock health or connect you with a vet.
+        What is your question or problem related to:
+        Select an option:
+        1. Diseases
+        2. Animal Nutritioning tips.
+        3. Consult an agriculture expert.
+    `;
+
+    res.send(welcomeMessage);
 });
-/*
+
+
 // Handle incoming USSD requests
 app.post('/ussd', (req, res) => {
     // Process USSD request logic here
@@ -26,7 +49,7 @@ app.post('/ussd', (req, res) => {
     `;
     res.send(response);
 });
-*/
+
 // Handle incoming USSD requests
 app.post('/ussd', (req, res) => {
     const { sessionId, serviceCode, phoneNumber, text } = req.body;
@@ -34,37 +57,36 @@ app.post('/ussd', (req, res) => {
     if (text === '') {
         // Initial USSD prompt
         let response = `
-            Welcome to the Agriculture Extension Service.
+            Welcome to the Amatuungo Aid. We can provide you with knowledge related to livestock health 
+            or connect you with a vet. What is your question or problem related to:
             Select an option:
-            1. Report an issue with your livestock.
-            2. Get farming tips.
-            3. Consult an agriculture expert.
+            1. Diseases
+            2. Animal Nutritioning tips.
+            3. Consult a veterinary expert.
         `;
         res.send(response);
     } else {
         // Process user's response
         switch (text) {
             case '1':
-                // Respond to option 1: Report an issue
+                // Respond to option 1: Diseases
                 let issueResponse = `
-                    Please describe the issue with your livestock.
-                    E.g., "My cows have ticks."
+                    Your animals are sick, boo hoo HAHA!
                 `;
                 res.send(issueResponse);
                 break;
             case '2':
-                // Respond to option 2: Get farming tips
+                // Respond to option 2: Get Animal Nutrition Information
                 let tipsResponse = `
-                    Here are some farming tips:
-                    - Tip 1: Use organic fertilizer for better yield.
-                    - Tip 2: Rotate your crops to maintain soil fertility.
+                    Why dont you know how to feed your animals bruh?!
+                    This is why your breath smells bad!
                 `;
                 res.send(tipsResponse);
                 break;
             case '3':
                 // Respond to option 3: Consult an expert
                 let expertResponse = `
-                    An agriculture expert will be with you shortly.
+                    An expert will be with you shortly.
                     Please hold on.
                 `;
                 res.send(expertResponse);
@@ -82,8 +104,4 @@ app.post('/ussd', (req, res) => {
         }
     }
 });
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+*/

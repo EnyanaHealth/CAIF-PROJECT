@@ -4,7 +4,19 @@ Amatuungo Aid is a triaging system for livestock farmers and Veterinary Officers
 
 
 
-## Usage
+## Project Files
+CAIF-PROJECT/
+│
+├── server.js
+├── routes/
+│   ├── index.js
+├── controllers/
+│   ├── ussdController.js
+├── helpers/
+│   ├── ussdHelpers.js
+├── .env
+├── package.json
+├── package-lock.json
 
 N/A
 
