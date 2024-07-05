@@ -1,4 +1,20 @@
 const express = require('express');
+const sql = require('mysql')
+
+db = sql.createConnection({
+    host: "localhost",
+user: "root",
+password: "root",
+database: "amatuungo_aid"});
+
+db.connect((err) => {
+    if(err) {
+        console.log("Database connection failed: " + err.stack);
+        return;
+    }
+
+    console.log("Connected to database")
+})
 
 
 const app = express();
