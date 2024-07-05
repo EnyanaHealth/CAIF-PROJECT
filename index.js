@@ -10,6 +10,7 @@ app.get("/api/test", function(req, res){
     res.send("Testing Request");
 })
 
+//HTTP requests that the USSD will send
 app.post('/ussd', (req, res) => {
     // Read the variables sent via POST from our API
     const {
@@ -19,11 +20,13 @@ app.post('/ussd', (req, res) => {
         text,
     } = req.body;
 
+    //
+
     let response = '';
 
     if (text == '') {
         // This is the first request. Note how we start the response with CON
-        response = `Welcome to Amatuungo AidHealth! I can help answer any questions or problems with your livestock. If needed, I can help connect you to a vet as well. 
+        response = `CON Welcome to Amatuungo AidHealth! I can help answer any questions or problems with your livestock. If needed, I can help connect you to a vet as well. 
             What can I help you with today?
 
             Select:
