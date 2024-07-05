@@ -4,15 +4,14 @@
   "description": "Amatuungo Aid is a triaging system for livestock farmers and Veterinary Officers in rural Uganda to provide better access to livestock agriculture knowledge, increase access and management of veterinary services, and diagnose specific livestock diseases.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "twilio": "^5.2.1"
+    "express": "^4.19.2"
   }
 }
