@@ -1,32 +1,21 @@
 const express = require('express');
-const sql = require('mysql')
+const db = require('./config/db');
+const userRoutes = require('./routes/userRoutes');
 
-
-db = sql.createConnection({
-    host: "localhost",
-user: "root",
-password: "root",
-database: "amatuungo_aid"});
-
-db.connect((err) => {
-    if(err) {
-        console.log("Database connection failed: " + err.stack);
-        return;
-    }
-
-    console.log("Connected to database")
-})
 
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
+app.use('/api/user', userRoutes);
 //Test request handlers
 app.get("/api/test", function(req, res){
     //res.send("Testing Request");
 })
 
+/*
 function userPromise(phoneNumber, category){
     return new Promise((resolve, reject) => {
 
@@ -42,6 +31,7 @@ function userPromise(phoneNumber, category){
         })
     });
 }
+
 
 function farmerPromise(farmerId, farmerName){
     return new Promise((resolve, reject) => {
@@ -154,7 +144,7 @@ app.post('/register_user', (req, res) => {
 
     
 });
-
+*/
 
 function addInformation(queryInformation){
 
@@ -255,15 +245,10 @@ app.post('/addBreeding&Reproduction', (req, res) => {
         console.log(err);
         res.send(JSON.stringify({"Message": "There was an error adding information"}))
     })
-
-
-
 })
 
 app.get('/retrievingBreeding&Reproduction', (req, res) => {
-
     const query = `SELECT * FROM breeding$reproduction`;
-
     retrieveInformation(query).then((result) => {
         console.log(result);
         res.send(JSON.stringify(result))
@@ -271,9 +256,6 @@ app.get('/retrievingBreeding&Reproduction', (req, res) => {
         console.log(err);
         res.send(JSON.stringify({"Message": "There was an error retrieving Breeding&Reproductioninformation"}))
     })
-
-
-
 })
 
 //HTTP requests that the USSD will send
